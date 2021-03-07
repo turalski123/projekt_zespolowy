@@ -23,8 +23,10 @@ services:
 
   queue-worker:
     image: python:3.9-buster
-    deploy:
-      replicas: 3
+    working_dir: /home/py
+    entrypoint: bash /home/py/entry.bash
+    volumes:
+      - ./queue:/home/py
 
   rabbitmq:
     image: rabbitmq:management-alpine
