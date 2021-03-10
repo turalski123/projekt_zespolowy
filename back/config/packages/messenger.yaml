@@ -5,7 +5,7 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: 
+            async:
                 dsn: '%env(SERVERINFO_MESSENGER_TRANSPORT_DSN)%'
                 serializer: messenger.transport.symfony_serializer
             # failed: 'doctrine://default?queue_name=failed'
