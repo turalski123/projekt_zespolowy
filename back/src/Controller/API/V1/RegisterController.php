@@ -41,7 +41,7 @@ class RegisterController extends AbstractController
     public function test(): Response
     {
         return $this->json([
-            'message' => 'Welcome to your new controller!',
+            'message' => 'Welcome to your new controller!r',
             'path' => 'src/Controller/API/V1/RegisterController.php',
         ]);
     }
