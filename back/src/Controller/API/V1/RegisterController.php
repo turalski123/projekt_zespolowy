@@ -34,4 +34,15 @@ class RegisterController extends AbstractController
             'path' => 'src/Controller/API/V1/RegisterController.php',
         ]);
     }
+
+    /**
+     * @Route("/api/v1/register2")
+     */
+    public function test(): Response
+    {
+        return $this->json([
+            'message' => 'Welcome to your new controller!',
+            'path' => 'src/Controller/API/V1/RegisterController.php',
+        ]);
+    }
 }
