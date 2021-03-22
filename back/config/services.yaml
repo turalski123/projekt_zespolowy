@@ -33,6 +33,12 @@ services:
     # please note that last definitions always *replace* previous ones
 
 
-    get_set_method_normalizer:
-        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+    reflection_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
         tags: [ serializer.normalizer ]
+
+    datetime_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+        tags: [ serializer.normalizer ]
+        arguments:
+            - { 'datetime_format': 'Y-m-d\TH:i:sP' }
