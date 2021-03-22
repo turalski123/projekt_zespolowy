@@ -1,3 +1,4 @@
+import hudson.Util;
 pipeline {
     agent any
     stages {
@@ -31,7 +32,7 @@ pipeline {
     post {
         always {
             script {
-                import hudson.Util;
+                
                 def buildDurationString = Util.getTimeSpanString(currentBuild.duration)
                 
                 withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
