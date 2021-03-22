@@ -4,7 +4,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'VPS_PROJEKT_ZESPOLOWY', keyFileVariable: '', passphraseVariable: 'password', usernameVariable: 'username')]) {
+                    withCredentials([usernamePassword(credentialsId: 'VPS_PROJEKT_ZESPOLOWY', passwordVariable: 'password', usernameVariable: 'username')]) {
                         def remote = [:]
                         remote.name = "VPS_PROJEKT_ZESPOLOWY"
                         remote.host = "51.38.131.167"
