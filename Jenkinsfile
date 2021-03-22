@@ -10,7 +10,7 @@ pipeline {
                         footer: '', 
                         image: '', 
                         link: RUN_DISPLAY_URL,
-                        result: '', 
+                        result: currentBuild.currentResult, 
                         thumbnail: '', 
                         title: 'Deploy - Projekt Zespolowy - :airplane_departure:', 
                         webhookURL: "https://discord.com/api/webhooks/${secret}"
@@ -55,7 +55,7 @@ pipeline {
                         footer: '', 
                         image: '', 
                         link: RUN_DISPLAY_URL,
-                        result: '', 
+                        result: currentBuild.currentResult, 
                         thumbnail: '', 
                         title: 'Deploy - Projekt Zespolowy - :airplane_arriving:', 
                         webhookURL: "https://discord.com/api/webhooks/${secret}"
