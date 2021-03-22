@@ -2,6 +2,20 @@ import hudson.Util;
 pipeline {
     agent any
     stages {
+        stage('Pre-Deploy') {
+            withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
+                discordSend(
+                    description: "Deploy NR: ${env.BUILD_NUMBER} rozpoczety", 
+                    footer: '', 
+                    image: '', 
+                    link: '', 
+                    result: '', 
+                    thumbnail: '', 
+                    title: 'Deploy - Projekt Zespolowy - :airplane_departure:', 
+                    webhookURL: "https://discord.com/api/webhooks/${secret}"
+                )
+            }
+        }
         stage('Deploy') {
             steps {
                 script {
@@ -19,7 +33,6 @@ pipeline {
                                 git pull
                                 docker-compose -f docker-compose.dev.yaml up -d --build
                                 docker-compose -f docker-compose.dev.yaml exec -T back composer install
-                                docker-compose -f docker-compose.dev.yaml exec -T front npm install
                             """.stripIndent(), 
                             remote: remote
                         )
@@ -32,7 +45,6 @@ pipeline {
     post {
         always {
             script {
-                
                 def buildDurationString = Util.getTimeSpanString(currentBuild.duration)
                 
                 withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
@@ -43,11 +55,10 @@ pipeline {
                         link: '', 
                         result: '', 
                         thumbnail: '', 
-                        title: 'Deploy - Projekt Zespolowy', 
+                        title: 'Deploy - Projekt Zespolowy - :airplane_arriving:', 
                         webhookURL: "https://discord.com/api/webhooks/${secret}"
                     )
                 }
-                
             }
         }
     }
