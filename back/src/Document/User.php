@@ -72,7 +72,7 @@ class User implements UserInterface
      */
     public function __construct()
     {
-
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
