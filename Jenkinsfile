@@ -3,17 +3,19 @@ pipeline {
     agent any
     stages {
         stage('Pre-Deploy') {
-            withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
-                discordSend(
-                    description: "Deploy NR: ${env.BUILD_NUMBER} rozpoczety", 
-                    footer: '', 
-                    image: '', 
-                    link: '', 
-                    result: '', 
-                    thumbnail: '', 
-                    title: 'Deploy - Projekt Zespolowy - :airplane_departure:', 
-                    webhookURL: "https://discord.com/api/webhooks/${secret}"
-                )
+            steps {
+                withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
+                    discordSend(
+                        description: "Deploy NR: ${env.BUILD_NUMBER} rozpoczety", 
+                        footer: '', 
+                        image: '', 
+                        link: '', 
+                        result: '', 
+                        thumbnail: '', 
+                        title: 'Deploy - Projekt Zespolowy - :airplane_departure:', 
+                        webhookURL: "https://discord.com/api/webhooks/${secret}"
+                    )
+                }
             }
         }
         stage('Deploy') {
