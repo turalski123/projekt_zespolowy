@@ -2,12 +2,20 @@
 
 namespace App\Controller\API\V1;
 
+use App\DTO\LikeDTO;
+use App\Exception\ValidationException;
+use App\Response\ApiResponse;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\DTO\RegisterDTO;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 /**
  * Class RegisterController
  * @package App\Controller\API\V1
@@ -15,6 +23,36 @@ use App\DTO\RegisterDTO;
  */
 class RegisterController extends AbstractController
 {
+    /**
+     * @var UserService
+     */
+    private UserService $userService;
+    /**
+     * @var ValidatorInterface
+     */
+    private ValidatorInterface $validator;
+    /**
+     * @var SerializerInterface
+     */
+    private SerializerInterface $serializer;
+
+    /**
+     * RegisterController constructor.
+     * @param UserService $userService
+     * @param ValidatorInterface $validator
+     * @param SerializerInterface $serializer
+     */
+    public function __construct(
+        UserService $userService,
+        ValidatorInterface $validator,
+        SerializerInterface $serializer
+    )
+    {
+        $this->userService = $userService;
+        $this->validator = $validator;
+        $this->serializer = $serializer;
+    }
+
     /**
      * @Route("/api/v1/register", methods={"POST"})
      *
@@ -26,23 +64,25 @@ class RegisterController extends AbstractController
      *     response=201,
      *     description="User registered"
      * )
+     *
+     * @throws ValidationException|\Doctrine\ODM\MongoDB\MongoDBException
      */
-    public function index(): Response
+    public function registerAction(Request $request): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/API/V1/RegisterController.php',
-        ]);
-    }
+        $registerDto = $this->serializer->deserialize(
+            $request->getContent(),
+            RegisterDTO::class,
+            'json'
+        );
+        if (($violations = $this->validator->validate($registerDto))->count() > 0) {
+            throw new ValidationException($violations);
+        }
 
-    /**
-     * @Route("/api/v1/register2")
-     */
-    public function test(): Response
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!r',
-            'path' => 'src/Controller/API/V1/RegisterController.php',
-        ]);
+        return new ApiResponse(
+            [
+                'id' => $this->userService->register($registerDto)
+            ],
+            Response::HTTP_CREATED
+        );
     }
 }
