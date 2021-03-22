@@ -27,10 +27,27 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
-          discordSend(description: "Build NR: ${env.BUILD_NUMBER}\nCzas trwania: ${currentBuild.durationString}\nStatus: ${currentBuild.result}", footer: '', image: '', link: '', result: '', thumbnail: '', title: 'Deploy - Projekt Zespolowy', webhookURL: 'https://discord.com/api/webhooks/823490990811250688/Z783nVrrz2ZgHVTGssZgvG-rNVSDb2XG6m6uCRcaMZrb1QnwP-pY3WiGBiEnOHSe_rj2')
+            script {
+                import hudson.Util;
+                def buildDurationString = Util.getTimeSpanString(currentBuild.duration)
+                
+                withCredentials([string(credentialsId: 'DISCORD_PROJEKT_ZESPOLOWY', variable: 'secret')]) {
+                    discordSend(
+                        description: "Deploy NR: ${env.BUILD_NUMBER}\nCzas trwania: ${buildDurationString}\nStatus: ${currentBuild.result}", 
+                        footer: '', 
+                        image: '', 
+                        link: '', 
+                        result: '', 
+                        thumbnail: '', 
+                        title: 'Deploy - Projekt Zespolowy', 
+                        webhookURL: "https://discord.com/api/webhooks/${secret}"
+                    )
+                }
+                
+            }
         }
     }
 }
