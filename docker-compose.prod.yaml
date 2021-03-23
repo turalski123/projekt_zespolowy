@@ -3,6 +3,7 @@ version: '3'
 services:
 
   back:
+    env_file: .env
     working_dir: /var/www/html/symfony
     build:
       context: ./back
@@ -13,6 +14,7 @@ services:
       - 8080:80
 
   front:
+    env_file: .env
     image: node:15-buster
     working_dir: /home/node/react
     entrypoint: bash /home/node/react/entry.bash
@@ -22,6 +24,7 @@ services:
       - ./front:/home/node/react
 
   queue-worker:
+    env_file: .env
     image: python:3.9-buster
     working_dir: /home/py
     entrypoint: bash /home/py/entry.bash
@@ -29,6 +32,7 @@ services:
       - ./queue:/home/py
 
   rabbitmq:
+    env_file: .env
     image: rabbitmq:management-alpine
     volumes:
       - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
@@ -37,6 +41,7 @@ services:
       - 15672:15672 # web ui
 
   mongo:
+    env_file: .env
     image: mongo:4.2
     restart: always
     volumes:
@@ -45,6 +50,7 @@ services:
       - 27017:27017
 
   mailhog:
+    env_file: .env
     image: mailhog/mailhog
     logging:
       driver: 'none'
