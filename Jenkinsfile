@@ -25,6 +25,9 @@ pipeline {
                         usernamePassword(credentialsId: 'VPS_PROJEKT_ZESPOLOWY', passwordVariable: 'password', usernameVariable: 'username'),
                         string(credentialsId: 'BACK_APP_SECRET', variable: 'BACK_APP_SECRET'),
                         string(credentialsId: 'BACK_MONGODB_DB', variable: 'BACK_MONGODB_DB'),
+                        string(credentialsId: 'BACK_JWT_SECRET_KEY_BASE64', variable: 'BACK_JWT_SECRET_KEY_BASE64'),
+                        string(credentialsId: 'BACK_JWT_PUBLIC_KEY_BASE64', variable: 'BACK_JWT_PUBLIC_KEY_BASE64'),
+                        string(credentialsId: 'BACK_JWT_PASSPHRASE', variable: 'BACK_JWT_PASSPHRASE'),
                         string(credentialsId: 'ENV_RABBITMQ_ERLANG_COOKIE', variable: 'ENV_RABBITMQ_ERLANG_COOKIE'),
                         string(credentialsId: 'ENV_RABBITMQ_DEFAULT_USER', variable: 'ENV_RABBITMQ_DEFAULT_USER'),
                         string(credentialsId: 'ENV_RABBITMQ_DEFAULT_PASS', variable: 'ENV_RABBITMQ_DEFAULT_PASS'),
@@ -50,6 +53,9 @@ pipeline {
                                 MONGODB_URL=mongodb://${ENV_MONGO_INITDB_ROOT_USERNAME}:${ENV_MONGO_INITDB_ROOT_PASSWORD}@mongo:27017
                                 MONGODB_DB=${BACK_MONGODB_DB}
                                 MESSENGER_TRANSPORT_DSN=amqp://${ENV_RABBITMQ_DEFAULT_USER}:${ENV_RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/%2f/emails
+                                JWT_SECRET_KEY_BASE64=${BACK_JWT_SECRET_KEY_BASE64}
+                                JWT_PUBLIC_KEY_BASE64=${BACK_JWT_PUBLIC_KEY_BASE64}
+                                JWT_PASSPHRASE=${BACK_JWT_PASSPHRASE}
 
                                 RABBITMQ_ERLANG_COOKIE=${ENV_RABBITMQ_ERLANG_COOKIE}
                                 RABBITMQ_DEFAULT_USER=${ENV_RABBITMQ_DEFAULT_USER}
