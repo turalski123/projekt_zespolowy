@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+  back:
+    working_dir: /var/www/html/symfony
+    build:
+      context: ./back
+    volumes:
+      - ./back:/var/www/html/symfony
+      - ./back/.docker/config:/etc/apache2/sites-enabled
+    ports:
+      - 8080:80
+
+  front:
+    image: node:15-buster
+    working_dir: /home/node/react
+    entrypoint: bash /home/node/react/entry.bash
+    ports:
+      - 80:3000
+    volumes:
+      - ./front:/home/node/react
+
+  queue-worker:
+    image: python:3.9-buster
+    working_dir: /home/py
+    entrypoint: bash /home/py/entry.bash
+    volumes:
+      - ./queue:/home/py
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    volumes:
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
+    ports:
+      - 15672:15672 # web ui
+
+  mongo:
+    image: mongo:4.2
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - 27017:27017
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - 8025:8025 # web ui
+
+volumes:
+  mongo_data: {}
