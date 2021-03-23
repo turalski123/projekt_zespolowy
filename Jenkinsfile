@@ -23,12 +23,12 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(credentialsId: 'VPS_PROJEKT_ZESPOLOWY', passwordVariable: 'password', usernameVariable: 'username'),
-                        string(credentialsId: 'BACK_APP_SECRET', variable: 'BACK_APP_SECRET')
-                        string(credentialsId: 'BACK_MONGODB_DB', variable: 'BACK_MONGODB_DB')
-                        string(credentialsId: 'ENV_RABBITMQ_ERLANG_COOKIE', variable: 'ENV_RABBITMQ_ERLANG_COOKIE')
-                        string(credentialsId: 'ENV_RABBITMQ_DEFAULT_USER', variable: 'ENV_RABBITMQ_DEFAULT_USER')
-                        string(credentialsId: 'ENV_RABBITMQ_DEFAULT_PASS', variable: 'ENV_RABBITMQ_DEFAULT_PASS')
-                        string(credentialsId: 'ENV_MONGO_INITDB_ROOT_USERNAME', variable: 'ENV_MONGO_INITDB_ROOT_USERNAME')
+                        string(credentialsId: 'BACK_APP_SECRET', variable: 'BACK_APP_SECRET'),
+                        string(credentialsId: 'BACK_MONGODB_DB', variable: 'BACK_MONGODB_DB'),
+                        string(credentialsId: 'ENV_RABBITMQ_ERLANG_COOKIE', variable: 'ENV_RABBITMQ_ERLANG_COOKIE'),
+                        string(credentialsId: 'ENV_RABBITMQ_DEFAULT_USER', variable: 'ENV_RABBITMQ_DEFAULT_USER'),
+                        string(credentialsId: 'ENV_RABBITMQ_DEFAULT_PASS', variable: 'ENV_RABBITMQ_DEFAULT_PASS'),
+                        string(credentialsId: 'ENV_MONGO_INITDB_ROOT_USERNAME', variable: 'ENV_MONGO_INITDB_ROOT_USERNAME'),
                         string(credentialsId: 'ENV_MONGO_INITDB_ROOT_PASSWORD', variable: 'ENV_MONGO_INITDB_ROOT_PASSWORD')
                     ]) {
                         def remote = [:]
