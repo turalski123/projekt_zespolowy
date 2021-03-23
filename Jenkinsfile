@@ -56,7 +56,7 @@ pipeline {
                                 RABBITMQ_DEFAULT_PASS=${ENV_RABBITMQ_DEFAULT_PASS}
                                 MONGO_INITDB_ROOT_USERNAME=${ENV_MONGO_INITDB_ROOT_USERNAME}
                                 MONGO_INITDB_ROOT_PASSWORD=${ENV_MONGO_INITDB_ROOT_PASSWORD}
-                                CORS_ALLOW_ORIGIN='^https?://(${remote.host})(:[0-9]+)?$'
+                                CORS_ALLOW_ORIGIN='^https?://(${remote.host})(:[0-9]+)?\$'
                                 EOF
                                 git pull
                                 docker-compose -f docker-compose.prod.yaml up -d --build
