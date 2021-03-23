@@ -97,6 +97,9 @@
     "mongodb/mongodb": {
         "version": "1.8.0"
     },
+    "monolog/monolog": {
+        "version": "2.2.0"
+    },
     "nelmio/api-doc-bundle": {
         "version": "3.0",
         "recipe": {
@@ -108,6 +111,18 @@
         "files": [
             "config/packages/nelmio_api_doc.yaml",
             "config/routes/nelmio_api_doc.yaml"
+        ]
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
         ]
     },
     "nikic/php-parser": {
@@ -263,6 +278,24 @@
         },
         "files": [
             "config/packages/messenger.yaml"
+        ]
+    },
+    "symfony/monolog-bridge": {
+        "version": "v5.2.5"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "d7249f7d560f6736115eee1851d02a65826f0a56"
+        },
+        "files": [
+            "config/packages/dev/monolog.yaml",
+            "config/packages/prod/deprecations.yaml",
+            "config/packages/prod/monolog.yaml",
+            "config/packages/test/monolog.yaml"
         ]
     },
     "symfony/options-resolver": {
