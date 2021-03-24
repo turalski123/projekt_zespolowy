@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Document\User;
 use App\DTO\RegisterDTO;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\MongoDBException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserService
@@ -37,7 +38,7 @@ class UserService
     /**
      * @param RegisterDTO $registerDto
      * @return string
-     * @throws \Doctrine\ODM\MongoDB\MongoDBException
+     * @throws MongoDBException
      */
     public function register(RegisterDTO $registerDto)
     {

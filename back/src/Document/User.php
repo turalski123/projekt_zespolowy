@@ -3,7 +3,7 @@
 namespace App\Document;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
+use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -72,7 +72,17 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTime());
+        $this->setCreatedAt(new DateTime());
+    }
+
+    /**
+     * @param DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt(DateTime $createdAt): User
+    {
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
     /**
@@ -84,36 +94,26 @@ class User implements UserInterface
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
-     * @return User
+     * @return DateTime
      */
-    public function setCreatedAt(\DateTime $createdAt): User
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return User
      */
-    public function setUpdatedAt(\DateTime $updatedAt): User
+    public function setUpdatedAt(DateTime $updatedAt): User
     {
         $this->updatedAt = $updatedAt;
         return $this;

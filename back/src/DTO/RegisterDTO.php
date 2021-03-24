@@ -2,10 +2,10 @@
 
 namespace App\DTO;
 
+use App\Document\User;
+use App\Validator as MyAssert;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator as MyAssert;
-use App\Document\User;
 
 class RegisterDTO
 {

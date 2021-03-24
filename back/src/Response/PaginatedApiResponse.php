@@ -4,7 +4,9 @@
 namespace App\Response;
 
 
-class PaginatedApiResponse extends \Symfony\Component\HttpFoundation\JsonResponse
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class PaginatedApiResponse extends JsonResponse
 {
     public function __construct(int $page, int $count, array $data, int $status = 200, array $headers = [], bool $json = false)
     {

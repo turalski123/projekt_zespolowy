@@ -4,8 +4,6 @@ namespace App\DTO;
 
 use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator as MyAssert;
-use App\Document\User;
 
 class LoginDTO
 {

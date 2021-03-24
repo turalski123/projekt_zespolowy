@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -48,7 +49,7 @@ class LexikJwtDecodeCommand extends Command
                     $token
                 )
             );
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $io->error(sprintf(
                 "Token can't be decoded because of error:\n\n%s",
                 $exception->getMessage()

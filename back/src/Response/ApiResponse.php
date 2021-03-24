@@ -4,7 +4,9 @@
 namespace App\Response;
 
 
-class ApiResponse extends \Symfony\Component\HttpFoundation\JsonResponse
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+class ApiResponse extends JsonResponse
 {
     public function __construct($data = null, int $status = 200, array $headers = [], bool $json = false)
     {

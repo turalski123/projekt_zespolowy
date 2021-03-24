@@ -3,6 +3,7 @@
 
 namespace App\Document;
 
+use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
@@ -12,51 +13,51 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 trait DateTrackingTrait
 {
     /**
-     * @var ?\DateTime
+     * @var ?DateTime
      * @MongoDB\Field(type="date", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @var ?\DateTime
+     * @var ?DateTime
      * @MongoDB\Field(type="date", nullable=true)
      */
     private $updatedAt;
 
 
     /**
-     * @return ?\DateTime
+     * @return ?DateTime
      */
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param ?\DateTime $createdAt
+     * @param ?DateTime $createdAt
      * @return DateTrackingTrait
      * @return DateTrackingTrait
      */
-    public function setCreatedAt(?\DateTime $createdAt)
+    public function setCreatedAt(?DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
     /**
-     * @return ?\DateTime
+     * @return ?DateTime
      */
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param ?\DateTime $updatedAt
+     * @param ?DateTime $updatedAt
      * @return DateTrackingTrait
      * @return DateTrackingTrait
      */
-    public function setUpdatedAt(?\DateTime $updatedAt)
+    public function setUpdatedAt(?DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
         return $this;
