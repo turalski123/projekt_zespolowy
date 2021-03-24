@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator as MyAssert;
 use App\Document\User;
 
-class RegisterDTO
+class LoginDTO
 {
     /**
      * @var string
@@ -20,10 +20,6 @@ class RegisterDTO
      * @Assert\NotBlank()
      * @Assert\Type(
      *     type="string"
-     * )
-     * @MyAssert\UniqueField(
-     *     fieldName="username",
-     *     entityClass=User::class
      * )
      */
     private string $username;
@@ -44,26 +40,6 @@ class RegisterDTO
     private string $password;
 
     /**
-     * @var string
-     * @OA\Property(
-     *     type="string",
-     *     description="email of the User",
-     *     example="superuser@email.com"
-     * )
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(
-     *     type="string"
-     * )
-     * @Assert\Email()
-     * @MyAssert\UniqueField(
-     *     fieldName="email",
-     *     entityClass=User::class
-     * )
-     */
-    private string $email;
-
-    /**
      * @return string
      */
     public function getUsername(): string
@@ -77,13 +53,5 @@ class RegisterDTO
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controller\API\V1;
 
-use App\DTO\LikeDTO;
 use App\Exception\ValidationException;
 use App\Response\ApiResponse;
 use App\Service\UserService;

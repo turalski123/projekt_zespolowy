@@ -1,4 +1,6 @@
 {
+    "name": "gh05t-pl/symfony-app",
+    "description": "Backend App",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
@@ -7,6 +9,7 @@
         "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.12",
         "doctrine/doctrine-bundle": "^2.2",
