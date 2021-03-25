@@ -50,6 +50,7 @@ pipeline {
 
                                 APP_ENV=${BACK_APP_ENV}
                                 APP_SECRET=${BACK_APP_SECRET}
+                                BACK_APP_HOST=${remote.host}
                                 MONGODB_URL=mongodb://${ENV_MONGO_INITDB_ROOT_USERNAME}:${ENV_MONGO_INITDB_ROOT_PASSWORD}@mongo:27017
                                 MONGODB_DB=${BACK_MONGODB_DB}
                                 MESSENGER_TRANSPORT_DSN=amqp://${ENV_RABBITMQ_DEFAULT_USER}:${ENV_RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/%2f/emails

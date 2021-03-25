@@ -1,5 +1,9 @@
 nelmio_api_doc:
     documentation:
+        servers:
+            -
+                url: "%env(BACK_APP_HOST)%"
+                description: API over HTTP
         info:
             title: Spamming App
             description: This is an awesome Spamming App for WSB class graduation!
