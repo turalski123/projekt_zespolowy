@@ -14,7 +14,7 @@ class ErrorApiResponse extends JsonResponse
             [
                 'success' => false,
                 'data' => null,
-                'error' => $error
+                'errors' => $error
             ],
             $status,
             $headers,
