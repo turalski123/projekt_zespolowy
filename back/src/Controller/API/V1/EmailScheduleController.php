@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use App\DTO\RegisterDTO;
+use App\DTO\EmailScheduleDTO;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class RegisterController
  * @package App\Controller\API\V1
- * @OA\Tag(name="Register")
+ * @OA\Tag(name="Email Schedule")
  */
-class RegisterController extends AbstractController
+class EmailScheduleController extends AbstractController
 {
     /**
      * @var UserService
@@ -53,10 +53,10 @@ class RegisterController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/register", methods={"POST"})
+     * @Route("/api/v1/email-schedule", methods={"POST"})
      *
      * @OA\RequestBody(
-     *     @Model(type=RegisterDTO::class)
+     *     @Model(type=EmailScheduleDTO::class)
      * )
      *
      * @OA\Response(
@@ -73,20 +73,20 @@ class RegisterController extends AbstractController
      *
      * @throws ValidationException|\Doctrine\ODM\MongoDB\MongoDBException
      */
-    public function registerAction(Request $request): Response
+    public function createAction(Request $request): Response
     {
-        $registerDto = $this->serializer->deserialize(
+        $emailScheduleDto = $this->serializer->deserialize(
             $request->getContent(),
-            RegisterDTO::class,
+            EmailScheduleDTO::class,
             'json'
         );
-        if (($violations = $this->validator->validate($registerDto))->count() > 0) {
+        if (($violations = $this->validator->validate($emailScheduleDto))->count() > 0) {
             throw new ValidationException($violations);
         }
-
+dd($emailScheduleDto);
         return new ApiResponse(
             [
-                'id' => $this->userService->register($registerDto)
+                'id' => $this->userService->register($emailScheduleDto)
             ],
             Response::HTTP_CREATED
         );
