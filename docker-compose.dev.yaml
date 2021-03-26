@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
 
@@ -6,11 +6,17 @@ services:
     working_dir: /var/www/html/symfony
     build:
       context: ./back
+      target: dev-backend
+    environment:
+      - PHP_IDE_CONFIG=serverName=symfony-docker
+      - XDEBUG_SESSION=PHPSTORM
     volumes:
       - ./back:/var/www/html/symfony
       - ./back/.docker/config:/etc/apache2/sites-enabled
     ports:
       - 8080:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   front:
     image: node:15-buster
