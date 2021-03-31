@@ -25,7 +25,12 @@ class SecurityController extends AbstractController
      *
      * @OA\Response(
      *     response=200,
-     *     description="User logged in"
+     *     description="Login endpoint with JWT Token",
+     *     @OA\JsonContent(
+     *        properties={
+     *          @OA\Property(property="token", type="string", description="JWT Token string")
+     *        }
+     *     )
      * )
      */
     public function loginAction(): Response
