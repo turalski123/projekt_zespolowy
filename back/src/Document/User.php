@@ -4,7 +4,9 @@ namespace App\Document;
 
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ODM\MongoDB\PersistentCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -68,11 +70,18 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
+     * @var EmailSchedule[]|PersistentCollection|ArrayCollection
+     * @MongoDB\ReferenceMany(targetDocument=EmailSchedule::class, mappedBy="owner")
+     */
+    private $emailSchedules;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->setCreatedAt(new DateTime());
+        $this->emailSchedules = new ArrayCollection();
     }
 
     /**
@@ -280,5 +289,35 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
+    }
+
+    /**
+     * @return PersistentCollection
+     */
+    public function getEmailSchedules(): PersistentCollection
+    {
+        return $this->emailSchedules;
+    }
+
+    /**
+     * @param ArrayCollection $emailSchedules
+     * @return User
+     */
+    public function setEmailSchedules(ArrayCollection $emailSchedules): self
+    {
+        $this->emailSchedules = $emailSchedules;
+
+        return $this;
+    }
+
+    /**
+     * @param EmailSchedule $emailSchedule
+     * @return User
+     */
+    public function addEmailSchedules(EmailSchedule $emailSchedule): self
+    {
+        $this->emailSchedules->add($emailSchedule);
+
+        return $this;
     }
 }
